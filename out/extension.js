@@ -15,9 +15,7 @@ function activate(context) {
             let endChar = cursorPosition.character;
             // Find postion until end of line
             // or not a character in CJK Unified Ideographs
-            while (endChar < activeLine.text.length &&
-                activeLine.text.charCodeAt(endChar) >= 0x4E00 &&
-                activeLine.text.charCodeAt(endChar) <= 0x9FFF) {
+            while (endChar < activeLine.text.length && validateChar(activeLine.text.charCodeAt(endChar))) {
                 endChar++;
             }
             var endPosition = cursorPosition.with(cursorPosition.line, endChar);
@@ -30,6 +28,17 @@ function activate(context) {
     context.subscriptions.push(disposable);
 }
 exports.activate = activate;
+function validateChar(ucode) {
+    if (ucode >= 0x4E00 && ucode <= 0x9FFF) {
+        return true;
+    }
+    else if (ucode >= 0x3040 && ucode <= 0x30FF) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 // this method is called when your extension is deactivated
 function deactivate() { }
 exports.deactivate = deactivate;
