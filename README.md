@@ -20,4 +20,4 @@ And the end result is supposed to be:
 
 Normally the key combination to clear original text while retaining punctuations is <kbd>Shift Down</kbd>+<kbd>End</kbd>+<kbd>←</kbd>+<kbd>←</kbd>+<kbd>Shift Up</kbd>+<kbd>Delete</kbd>, which is quite lengthy and can be really annoying when you press a wrong key.
 
-This extension selects and deletes everything that is not in the CJK Unified Ideographs defined in Unicode after cursor position. In other words, this extension is designed to produce the final result from editing state with one key combination.
+This extension selects and deletes everything that's not Hiragana, Katagana, or Kanji after current cursor position. In other words, this extension is designed to produce the final result from editing state with one key combination.
