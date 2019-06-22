@@ -14,7 +14,7 @@ function activate(context) {
             const activeLine = activeEditor.document.lineAt(cursorPosition.line);
             let endChar = cursorPosition.character;
             // Find postion until end of line
-            // or not a character in CJK Unified Ideographs
+            // or not a valid character
             while (endChar < activeLine.text.length && validateChar(activeLine.text.charCodeAt(endChar))) {
                 endChar++;
             }
@@ -29,10 +29,28 @@ function activate(context) {
 }
 exports.activate = activate;
 function validateChar(ucode) {
-    if (ucode >= 0x4E00 && ucode <= 0x9FFF) {
+    // Basic Latin
+    if (ucode <= 0x007F) {
         return true;
+        // Hiragana and Katagana
+    }
+    else if (ucode >= 0x4E00 && ucode <= 0x9FFF) {
+        return true;
+        // CJK Unified Ideographs
     }
     else if (ucode >= 0x3040 && ucode <= 0x30FF) {
+        return true;
+        // Halfwidth and Fullwidth Forms Numbers
+    }
+    else if (ucode >= 0xFF10 && ucode <= 0xFF19) {
+        return true;
+        // Halfwidth and Fullwidth Forms Alphabet
+    }
+    else if (ucode >= 0xFF21 && ucode <= 0xFF3A) {
+        return true;
+        // Halfwidth and Fullwidth Forms Half Kanas
+    }
+    else if (ucode >= 0xFF66 && ucode <= 0xFF9D) {
         return true;
     }
     else {
