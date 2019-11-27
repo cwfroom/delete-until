@@ -8,7 +8,8 @@ const terminateSymbols = [
 	"？",
 	"！",
 	"…",
-	"♪"
+	"♪",
+	"）"
 ];
 
 // this method is called when your extension is activated
